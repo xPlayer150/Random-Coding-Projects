@@ -1,19 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
+using rn = uint32_t;
 
-int gcd(int a, int b) {
+rn gcd(rn a, rn b) {
     if (min(a, b) > 0 && max(a, b) - min(a, b) > 0) {
         return gcd(min(a, b), max(a, b)-min(a, b));
     }
     return min(a, b);
 }
 
-int lcm(int a, int b) {
+rn lcm(rn a, rn b) {
     return (a * b) / gcd(a, b);
 }
 
-int lpd(int n) {
-    for (int i = 2; i <= sqrt(n); i++) {
+rn lpd(rn n) {
+    for (rn i = 2; i <= sqrt(n); i++) {
         if (n % i == 0) {
             return i;
         }
@@ -21,11 +22,11 @@ int lpd(int n) {
     return 1;
 }
 
-vector<int> pf(int n) {
-    vector<int> p;
-    queue<int> q;
+vector<rn> pf(rn n) {
+    vector<rn> p;
+    queue<rn> q;
 
-    int lp = lpd(n);
+    rn lp = lpd(n);
     if (lp == 1) {
         p.push_back(n);
         return p; //prime, can't be factorized
@@ -54,21 +55,21 @@ vector<int> pf(int n) {
 }
 
 // examples of using the functions
-int main() {
+rn main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int a, b;
+    rn a, b;
     cin >> a >> b;
     cout << gcd(a, b) << '\n' << lcm(a, b) << '\n';
     
-    vector<int> ap = pf(a);
-    vector<int> bp = pf(b);
-    for (int i : ap) {
+    vector<rn> ap = pf(a);
+    vector<rn> bp = pf(b);
+    for (rn i : ap) {
         cout << i << " ";
     }
     cout << '\n';
-    for (int i : bp) {
+    for (rn i : bp) {
         cout << i << " ";
     }
     cout << '\n';
